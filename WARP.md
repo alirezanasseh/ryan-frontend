@@ -17,16 +17,16 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 ### Common Commands
 ```bash
 # Start development server (runs on port 3000)
-npm run dev
+yarn dev
 
 # Build for production
-npm run build
+yarn build
 
 # Run linting
-npm run lint
+yarn lint
 
 # Preview production build
-npm run preview
+yarn preview
 ```
 
 ### Dependencies
@@ -258,10 +258,10 @@ rm -rf node_modules/.vite
 
 # Reinstall dependencies
 rm -rf node_modules package-lock.json
-npm install
+yarn install
 
 # Force port if 3000 is occupied
-npm run dev -- --port 3001
+yarn dev -- --port 3001
 ```
 
 ### ESLint Configuration
