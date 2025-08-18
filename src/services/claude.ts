@@ -1,3 +1,5 @@
+import type {AnthropicResponse} from "../types.ts";
+
 interface ClaudeRequest {
     messages: { role: 'user' | 'assistant'; content: string }[];
     systemPrompt?: string;
@@ -9,7 +11,7 @@ export class ClaudeService {
     async sendMessage(messages: {
         role: 'user' | 'assistant';
         content: string
-    }[], systemPrompt?: string): Promise<string> {
+    }[], systemPrompt?: string): Promise<AnthropicResponse> {
         try {
             const response = await fetch(`${this.baseUrl}/chat`, {
                 method: 'POST',
