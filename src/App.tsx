@@ -134,16 +134,19 @@ Always provide complete, functional code examples and explain your implementatio
                 getSystemPrompt(currentSystem)
             );
 
+            console.log(response);
+            const responseText = response.content[0].text
+
             // Add assistant response
             addMessage(currentSystem, {
                 role: 'assistant',
-                content: response,
+                content: responseText,
                 timestamp: new Date()
             });
 
             // Extract mermaid charts and other data from response
-            const mermaidMatch = response.match(/```mermaid\n([\s\S]*?)\n```/);
-            const codeMatch = response.match(/```(?:typescript|javascript|html|css)\n([\s\S]*?)\n```/);
+            const mermaidMatch = responseText.match(/```mermaid\n([\s\S]*?)\n```/);
+            const codeMatch = responseText.match(/```(?:typescript|javascript|html|css)\n([\s\S]*?)\n```/);
 
             if (mermaidMatch || codeMatch) {
                 const data = {...project.data};
@@ -151,14 +154,14 @@ Always provide complete, functional code examples and explain your implementatio
                     data[currentSystem] = {
                         ...data[currentSystem],
                         mermaid: mermaidMatch[1],
-                        text: response.replace(/```mermaid\n[\s\S]*?\n```/, '').trim()
+                        text: responseText.replace(/```mermaid\n[\s\S]*?\n```/, '').trim()
                     };
                 }
                 if (codeMatch) {
                     data[currentSystem] = {
                         ...data[currentSystem],
                         code: codeMatch[1],
-                        text: response.replace(/```(?:typescript|javascript|html|css)\n[\s\S]*?\n```/, '').trim()
+                        text: responseText.replace(/```(?:typescript|javascript|html|css)\n[\s\S]*?\n```/, '').trim()
                     };
                 }
 
